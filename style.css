@@ -1,0 +1,134 @@
+body {
+    background: #7abcff;
+    background: -moz-linear-gradient(top, #7abcff 0%, #60abf8 44%, #4096ee 100%);
+    background: -webkit-linear-gradient(top, #7abcff 0%, #60abf8 44%, #4096ee 100%);
+    background: linear-gradient(to bottom, #7abcff 0%, #60abf8 44%, #4096ee 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#7abcff', endColorstr='#4096ee', GradientType=0);
+    font-family: sans-serif;
+    color: white;
+}
+
+h1 {
+    font-size: 4em;
+    font-weight: 200;
+    border-bottom: 2px solid #e8f1fd; 
+    margin-top: 20px;
+}
+
+input, p {
+    cursor: pointer;
+}
+
+.container {
+    height: 100vh;
+    width: 1280px;
+    margin: auto;
+}
+
+.buffer {
+
+    margin-bottom: 80px
+}
+
+
+/******************** LEFT ************************/
+
+
+
+.left {
+    display: inline-block;
+}
+    form {
+        font-size: 2em;
+        display: inline-block;
+    }
+    .form-top {
+        margin-bottom: 60px
+    }
+
+    .form-top input {
+        height: 60px;
+        color: grey; 
+        width: 240px;
+        font-style: italic;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .add-btn input{
+        padding: 20px;
+        border-radius: 10px;
+        color: white;
+    }
+
+    .add-btn input[type="submit"] {
+        background-color: #77DD77;
+    }
+
+    .add-btn input[type="reset"] {
+        background-color: #FFB347;
+    }
+
+    .form-descr textarea {
+        color: grey; 
+        font-style: italic;
+        padding: 20px;
+        margin-top: 10px; 
+        margin-bottom: 20px;
+        border-radius: 10px;
+        resize: none;
+    }
+
+
+/******************** RIGHT ************************/
+
+
+.right {
+    display: inline-block;
+    vertical-align: top;
+}
+
+    .bubble {
+        display: block;
+        width: 300px;
+        margin-left: 45px;
+        color: grey;
+        text-align: center;
+        border-radius: 10px;
+        padding: 20px;
+        background-color: #f0f9ff; 
+        @include filter-gradient(#f0f9ff, #a1dbff, vertical); 
+        @include background-image(linear-gradient(top,  #f0f9ff 0%,#cbebff 47%,#a1dbff 100%));
+        border:3px solid white;
+        box-shadow: 3px 3px 20px #4d6499; 
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        font-size: 2em;
+        margin: 0;
+        font-weight: 100;
+        margin-bottom: 10px
+    }
+
+    .describe {
+        background: #7abcff;
+        background: -moz-linear-gradient(top, #7abcff 0%, #60abf8 44%, #4096ee 100%);
+        background: -webkit-linear-gradient(top, #7abcff 0%, #60abf8 44%, #4096ee 100%);
+        background: linear-gradient(to bottom, #7abcff 0%, #60abf8 44%, #4096ee 100%);
+        filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#7abcff', endColorstr='#4096ee', GradientType=0);
+        border-radius: 5px;
+        color: white;
+        padding: 10px;
+        margin-top: 20px; 
+        font-size: 1.2em;
+    }
+
+
+
+
+
+
+
+
+
