@@ -11,7 +11,7 @@ body {
 h1 {
     font-size: 4em;
     font-weight: 200;
-    border-bottom: 2px solid #e8f1fd; 
+    border-bottom: 2px solid #e8f1fd;
     margin-top: 20px;
 }
 
@@ -21,7 +21,7 @@ input, p {
 
 .container {
     height: 100vh;
-    width: 1280px;
+    width: 970px;
     margin: auto;
 }
 
@@ -47,16 +47,16 @@ input, p {
     }
 
     .form-top input {
-        height: 60px;
-        color: grey; 
-        width: 240px;
+        height: 40px;
+        color: grey;
+        width: 150px;
         font-style: italic;
         padding: 10px;
         border-radius: 10px;
     }
 
     .add-btn input{
-        padding: 20px;
+        padding: 10px 20px;
         border-radius: 10px;
         color: white;
     }
@@ -70,13 +70,14 @@ input, p {
     }
 
     .form-descr textarea {
-        color: grey; 
+        color: grey;
         font-style: italic;
         padding: 20px;
-        margin-top: 10px; 
+        margin-top: 10px;
         margin-bottom: 20px;
         border-radius: 10px;
         resize: none;
+        width: 650px;
     }
 
 
@@ -90,22 +91,23 @@ input, p {
 
     .bubble {
         display: block;
-        width: 300px;
+        width: 180px;
         margin-left: 45px;
         color: grey;
         text-align: center;
         border-radius: 10px;
         padding: 20px;
-        background-color: #f0f9ff; 
-        @include filter-gradient(#f0f9ff, #a1dbff, vertical); 
+        background-color: #f0f9ff;
+        @include filter-gradient(#f0f9ff, #a1dbff, vertical);
         @include background-image(linear-gradient(top,  #f0f9ff 0%,#cbebff 47%,#a1dbff 100%));
         border:3px solid white;
-        box-shadow: 3px 3px 20px #4d6499; 
+        box-shadow: 3px 3px 20px #4d6499;
         margin-bottom: 20px;
+
     }
 
     h2 {
-        font-size: 2em;
+        font-size: 1.3em;
         margin: 0;
         font-weight: 100;
         margin-bottom: 10px
@@ -120,15 +122,6 @@ input, p {
         border-radius: 5px;
         color: white;
         padding: 10px;
-        margin-top: 20px; 
-        font-size: 1.2em;
+        margin-top: 20px;
+        font-size: 1em;
     }
-
-
-
-
-
-
-
-
-

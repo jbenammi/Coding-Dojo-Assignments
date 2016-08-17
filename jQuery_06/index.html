@@ -10,22 +10,22 @@
         $(document).ready(function () {
             console.log("j@uery on tap")
             $('form').submit(function () {
-                
+
                 var name = $("#fn").val();
                 var last = $("#ln").val();
                 var description = $("#des").val();
-                var more = "Click here to know more about me!";
-                var less = "Click to close description.";
+                var more = "Click for description.";
+                var less = "Click to close.";
                 var state = 0;
-                
+
 
               $('.right').append("<div class='bubble'>" + "<h2>" + name + " " + last + "</h2>" + "<p>" + more + "</p>" + "</div>");
-                
+
                $('.bubble').on("click", "p", function(){
                    console.log("p clicked")
                    console.log(state)
                    if(state == 0){
-                     
+
                        $(this).text(less);
                        $(this).append("<div class='describe'>" + description + "</div>");
                        state ++;
@@ -33,7 +33,7 @@
                        $(this).text(more);
                        state --;
                    }
-               }) 
+               })
                 return false;
             });
         });
@@ -52,14 +52,14 @@
                     <input type="text" name="last_name" required="required" id="ln"> </div>
                 <div>Description:</div>
                 <div class="form-descr">
-                    <textarea name="moreinfo" cols="52" rows="10" required="required" id="des"></textarea>
+                    <textarea name="moreinfo" cols="52" rows="4" required="required" id="des"></textarea>
                 </div>
                 <div class="add-btn">
                     <input type="submit" value="Add to wall">
                     <input type="reset"> </div>
             </form>
         </div><!--end of left-->
-        <div class="right"> 
+        <div class="right">
         </div><!--end of right-->
     </div><!--end of container -->
 </body>
