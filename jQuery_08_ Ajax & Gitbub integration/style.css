@@ -1,0 +1,93 @@
+body {
+    font-family: sans-serif;
+   
+}
+
+.container {
+    width: 970px;
+    margin: auto;
+}
+
+.buffer {
+    
+    border-bottom: 1.5px solid grey;
+
+}
+
+textarea {
+    min-height: 210px;
+    resize: none; 
+}
+    
+.bubble {
+    
+}
+
+#right {
+    margin-top: 20px;
+}
+
+.container2 {
+    
+    background: #F7F7F7;
+    border: 2px solid #E5E5E5;
+    width: 80%;
+    margin: auto;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px; 
+}
+
+#github{
+    margin-top: 30px; 
+    padding-left: 0;
+}
+
+#github h3 {
+    padding-left: 15px
+}
+.gitcard {
+    background: #F7F7F7;
+    border: 2px solid #E5E5E5;
+    width: 80%;
+    margin: auto;
+    padding:  20px;
+    border-radius: 10px;
+    margin-bottom: 20px; 
+}
+
+.gitcard img {
+    margin: 5px;
+    height: 90px;
+    width: 90px;
+    border-radius: 50%;
+    border: 2px solid #E5E5E5;
+    margin-top: 10px;
+    display: inline-block;
+    vertical-align: top; 
+    
+}
+
+.gitcard_text {
+    display: inline-block;
+}
+
+.gitcard h1 {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.gitcard p {
+    margin-left: 20px;
+    margin-bottom: 30px;
+    display: block;
+}
+
+#gitstats {
+    display: block;
+    margin-bottom: 10px;
+}
+
+#gitstats h4 {
+    margin-top: 20px;
+}

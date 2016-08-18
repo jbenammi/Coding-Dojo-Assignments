@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./font-awesome-4.6.3/css/font-awesome.min.css">
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            console.log("j@uery on tap")
+            $('.contact_form').submit(function () {
+                var name = $("#fn").val();
+                var last = $("#ln").val();
+                var description = $("#des").val();
+                var more = "Click for description.";
+                var less = "Click to close.";
+                var state = 0;
+                $('#right').append("<div class='container2'>" + "<h2>" + name + " " + last + "</h2>" + "<p>" + more + "</p>" + "<h3 style='display: none'>" + description + "</h3>" + "</div>");
+                return false;
+            });
+            $(document).on("click", ".container2", function () {
+                $(this).children().toggle("slow");
+            });
+            
+            $('.git_form').submit(function(){
+               console.log("git");
+                
+                $.get('https://api.github.com/users/' + $("#gitname").val(), function(res){
+                      
+                    console.log(res);
+                    console.log(res.name);
+                    console.log(res.avatar_url);
+                    $('#right').append(
+                        "<div class='gitcard'>" +
+                        "<img src='" +
+                        res.avatar_url +
+                        "'>"+
+                        "<div class='gitcard_text'>" +
+                        "<h1>" +
+                        res.name +
+                        "</h1>" +
+                        "<p>" +
+                        "Click for more..." + 
+                        "</p>" +
+                        "</div>" +
+                        "<div id='gitstats' style='display: none'>" +
+                        "<h2>Bio</h2>" +
+                        res.bio +
+                        "<h4><i class='fa fa-folder-open' aria-hidden='true'></i>" +
+                        " " +
+                        res.public_repos +
+                        " Public Repo's</h4>" +
+                        "<h4><i class='fa fa-users' aria-hidden='true'></i>" +
+                        " " +
+                        res.followers +
+                        " Followers </h4>" +
+                        "<h4><i class='fa fa-eye' aria-hidden='true'></i>" +
+                        " " +
+                        res.following +
+                        " Following </h4>" +
+                        "</div>"
+                             
+                    );
+                    
+                    $(document).on("click", ".gitcard", function () {
+                        $(this).children().toggle("slow");
+                    });
+                })
+                
+               return false;
+            });
+            
+            
+        });
+    </script>
+    <title>Contact Card</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 buffer">
+                <h1>Contact Card</h1> </div>
+            <div class="col-lg-6" id="left">
+                <form class="contact_form"action="">
+                    <div class="col-md-6">
+                        <h3>Name:</h3>
+                        <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" placeholder="e.g Werner" id="fn"> </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h3>Surname:</h3>
+                        <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" placeholder="e.g Heisenberg" id="ln"> </div>
+                    </div>
+                    <div class="col-md-12">
+                        <h3>Description:</h3>
+                        <div class="form-group">
+                            <textarea class="form-control" id="des" placeholder="e.g Known for the uncertainty principle in Quantum Mechanics"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-10">
+                        <button type="submit" class="btn btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add to Wall</button>
+                        <button type="reset" class="btn btn-warning"><i class="fa fa-eraser" aria-hidden="true"></i> Erase</button>
+                    </div>
+                </form>
+                
+                
+                
+                <div class="col-md-12" id="github">
+                        <h3>Search Github:</h3>
+                        
+                        
+                    <form class="git_form" action="">
+                        <div class="col-md-6">
+                            <div class="input-group"> 
+                               <span class="input-group-addon">
+                               <i class="fa fa-github" aria-hidden="true"></i>
+                               </span>
+                               <input type="text" class="form-control" placeholder="e.g NicMuller" id="gitname"> 
+                            </div>
+                        </div>
+                        <button type="submit" id="git-submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                    </form>
+                    
+                    
+                    
+                </div>
+            </div> <!-- Left-->
+            <div class="col-lg-6" id="right"> </div>
+            <div class="git_card">
+                
+            </div>
+        </div>   
+    </div>
+</body>
+
+</html>
