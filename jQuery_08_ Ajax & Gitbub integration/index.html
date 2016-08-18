@@ -33,8 +33,7 @@
             $('.git_form').submit(function(){
                console.log("git");
                 
-                $.get('https://api.github.com/users/' + $("#gitname").val(), function(res){
-                      
+                $.get('https://api.github.com/users/' + $("#gitname").val(), function(res){      
                     console.log(res);
                     console.log(res.name);
                     console.log(res.avatar_url);
@@ -66,19 +65,14 @@
                         " " +
                         res.following +
                         " Following </h4>" +
-                        "</div>"
-                             
+                        "</div>"            
                     );
-                    
+                })
+               return false;
+            });
                     $(document).on("click", ".gitcard", function () {
                         $(this).children().toggle("slow");
                     });
-                })
-                
-               return false;
-            });
-            
-            
         });
     </script>
     <title>Contact Card</title>
@@ -111,14 +105,9 @@
                         <button type="submit" class="btn btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add to Wall</button>
                         <button type="reset" class="btn btn-warning"><i class="fa fa-eraser" aria-hidden="true"></i> Erase</button>
                     </div>
-                </form>
-                
-                
-                
+                </form>     
                 <div class="col-md-12" id="github">
-                        <h3>Search Github:</h3>
-                        
-                        
+                    <h3>Search Github:</h3>              
                     <form class="git_form" action="">
                         <div class="col-md-6">
                             <div class="input-group"> 
@@ -130,14 +119,11 @@
                         </div>
                         <button type="submit" id="git-submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
                     </form>
-                    
-                    
-                    
+                             
                 </div>
             </div> <!-- Left-->
             <div class="col-lg-6" id="right"> </div>
-            <div class="git_card">
-                
+            <div class="git_card">          
             </div>
         </div>   
     </div>
