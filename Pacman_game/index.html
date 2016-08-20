@@ -20,6 +20,7 @@
          height: 20px;
          display: inline-block;
          vertical-align: top;
+
       }
       div.brick {
          background-color: blue;
@@ -77,7 +78,7 @@
          border-radius: 5px;
          color: white;
          text-align: center;
-         paddin: 7px;
+         padding: 7px;
          position: absolute;
          top: 10px;
          left: 620px;
@@ -88,6 +89,16 @@
       div#bridgeRight {
          background-color: black;
       }
+        
+        div#lives {
+         background: url(heart.gif) no-repeat center;
+         background-size: cover;
+         width: 70px;
+         height: 35px;
+         position: absolute;
+         top: 10px;
+         left: 700px
+        }
     </style>
 </head>
 <body>
@@ -95,8 +106,10 @@
       <div id="world"></div>
       <div id="pacman"></div>
       <div id="score">0</div>
+      <div id="lives"></div>
    </div>
    <script>
+       
    var world = [
       [3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,4],
       [2,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
@@ -116,34 +129,22 @@
       [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
       [6,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,5]
    ];
-      // Basic without corners
-      // var world = [
-      //    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
-      //    [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
-      //    [2,1,2,2,2,1,2,2,2,2,2,1,2,2,2,2,2,2,1,2,2,2,2,2,1,2,2,2,1,2],
-      //    [2,1,2,2,2,1,2,2,2,2,2,1,2,2,2,2,2,2,1,2,2,2,2,2,1,2,2,2,1,2],
-      //    [2,1,1,1,1,1,2,2,1,2,2,1,1,1,2,2,1,1,1,2,2,1,2,2,1,1,1,1,1,2],
-      //    [2,2,2,2,2,1,2,2,1,2,2,1,1,1,2,2,1,1,1,2,2,1,1,1,1,2,2,2,2,2],
-      //    [0,0,0,0,2,1,2,2,1,2,2,1,1,1,2,2,1,1,1,2,2,1,1,1,1,2,0,0,0,0],
-      //    [2,2,2,2,2,1,2,2,1,2,2,1,1,1,2,2,1,1,1,2,2,1,1,1,1,2,2,2,2,2],
-      //    [0,0,0,0,0,1,2,2,1,2,2,1,1,1,2,2,1,1,1,2,2,1,2,2,0,0,0,0,0,0],
-      //    [2,2,2,2,2,1,2,2,1,2,2,1,2,2,2,2,2,2,1,2,2,2,2,2,1,2,2,2,2,2],
-      //    [0,0,0,0,2,1,2,2,1,2,2,1,2,2,2,2,2,2,1,2,2,2,2,2,1,2,0,0,0,0],
-      //    [2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2],
-      //    [2,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,2],
-      //    [2,1,2,2,2,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,2,2,2,1,2],
-      //    [2,1,2,2,2,1,2,2,2,2,2,2,2,2,0,0,2,2,2,2,2,2,2,2,1,2,2,2,1,2],
-      //    [2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
-      //    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
-      // ];
-
-   var score = 0;
-
-   var pacman = {
+    var score = 0;
+    var pacman = {
       x: 1,
       y: 1
-   }
+   }       
+    var chomp = new Audio('pacman_chomp.wav')
+    var cherry = new Audio('pacman_eatfruit.wav')
+    var death = new Audio('pacman_death.wav')
+    var begin = new Audio('pacman_beginning.wav')
+        
+       
+       
+  
+       
       function displayWorld(){
+
          var output = '';
          for (var i = 0; i < world.length; i++) {
             output += "\n<div class='row'>\n"
@@ -182,7 +183,7 @@
       }
       function displayCherry(){
         var counter = 0;
-        while (counter < 100){
+        while (counter < 181){
           var random1 = Math.floor((Math.random() * (world.length)));
           var random2 = Math.floor((Math.random() * (world[random1].length)));
 
@@ -217,11 +218,15 @@
          document.getElementById('pacman').style = "-webkit-transform: rotate(270deg)";
       }
 
+
       displayWorld();
       displayPacman();
       displayScore();
       displayCherry();
       moveGhost();
+    
+      
+ begin.play();
 
       document.onkeydown = function(e){
          console.log(e.keyCode);
@@ -270,6 +275,7 @@
 
          if(world[pacman.y][pacman.x] == 1){
             world[pacman.y][pacman.x] = 0;
+            chomp.play(); 
             score += 10;
             displayWorld();
             displayScore();
@@ -277,13 +283,19 @@
 
          if(world[pacman.y][pacman.x] == 9){
             world[pacman.y][pacman.x] = 0;
+            cherry.play();
             score += 50;
             displayWorld();
             displayScore();
          }
          if(world[pacman.y][pacman.x] == 10){
+             
+            
             document.getElementById('pacman').style.display = "none";
+            
+            death.play(); 
             alert("You Died a Ghostly Death!")
+            document.getElementById('lives').style.display = "none";
          }
          if(world[pacman.y][pacman.x-1] == 7){
             pacman.x = 28;
@@ -293,8 +305,9 @@
             pacman.x = 2;
             displayPacman();
          }
-
+         
          displayPacman();
+        
       }
    </script>
 </body>
