@@ -1,79 +1,86 @@
 <html>
+
 <head>
 	<title>1942 Game</title>
 
-<style type="text/css">
-	body{
-		background-color:black;
-	}
-	#container{
-		background: url('background.jpg');
-		background-repeat: no-repeat;
-		background-size:cover;
-		width:1000px;
-		height:550px;
-		position: fixed;
-	}
-	#hero{
-		background: url('1942.gif');
-		background-position: -85px -180px;
-		width:28px;
-		height:28px;
-		position:absolute;
-	}
-	.enemy1{
-		background: url('1942.gif');
-		background-position: -30px -10px;
-		width:28px;
-		height:28px;
-		position:absolute;
-	}
+	<style type="text/css">
+		body {
+			background-color: black;
+		}
 
-	.enemy2{
-		background: url('1942.gif');
-		background-position: -50px -60px;
-		width:28px;
-		height:28px;
-		position:absolute;
-	}
+		#container {
+			background: url('background.jpg');
+			background-repeat: no-repeat;
+			background-size: cover;
+			width: 1000px;
+			height: 550px;
+			position: fixed;
+		}
 
-	.explode{
-		background: url('1942.gif');
-		background-position: -110px -30px;
-		width:28px;
-		height:28px;
-		position:absolute;
-	}
-	.bullet{
-		background: url('1942.gif');
-		background-position: -185px -400px;
-		width:18px;
-		height:18px;
-		position:absolute;
-	}
-	#score{
-		position:absolute;
-		border:10px solid red;
-		top:20px;
-		left:800px;
-		background-color:white;
-		padding:10px;
-		font-size:30px;
-		font-family: Arial;
-	}
-	#replay{
-		position:absolute;
-		border:10px solid cornflowerblue;
-		top:100px;
-		left:800px;
-		background-color:white;
-		padding:10px;
-		font-size:30px;
-		font-family: Arial;
-	}
+		#hero {
+			background: url('1942.gif');
+			background-position: -85px -180px;
+			width: 28px;
+			height: 28px;
+			position: absolute;
+		}
 
-</style>
+		.enemy1 {
+			background: url('1942.gif');
+			background-position: -30px -10px;
+			width: 28px;
+			height: 28px;
+			position: absolute;
+		}
+
+		.enemy2 {
+			background: url('1942.gif');
+			background-position: -50px -60px;
+			width: 28px;
+			height: 28px;
+			position: absolute;
+		}
+
+		.explode {
+			background: url('1942.gif');
+			background-position: -110px -30px;
+			width: 28px;
+			height: 28px;
+			position: absolute;
+		}
+
+		.bullet {
+			background: url('1942.gif');
+			background-position: -185px -400px;
+			width: 18px;
+			height: 18px;
+			position: absolute;
+		}
+
+		#score {
+			position: absolute;
+			border: 10px solid red;
+			top: 20px;
+			left: 800px;
+			background-color: white;
+			padding: 10px;
+			font-size: 30px;
+			font-family: Arial;
+		}
+
+		#replay {
+			position: absolute;
+			border: 10px solid cornflowerblue;
+			top: 100px;
+			left: 800px;
+			background-color: white;
+			padding: 10px;
+			font-size: 30px;
+			font-family: Arial;
+		}
+	</style>
 </head>
+
 <body>
 	<div id='container'>
 		<div id='hero'></div>
@@ -84,138 +91,163 @@
 	</div>
 
 	<div id='score'>0</div>
-	<FORM id='replay'><INPUT TYPE="button" onClick="history.go(0)" VALUE="Replay">
+	<FORM id='replay'>
+		<INPUT TYPE="button" onClick="history.go(0)" VALUE="Replay">
 	</FORM>
 
-<script>
-	var hero = {
-		x: 750,
-		y: 400
-	}
-	var enemies = [ {x:50, y:200}, {x:250, y:400}, {x:650, y:150}, {x:650, y:350}, {x:650, y:200}, {x:50, y:200}, {x:50, y:200}];
-	var enemy2 = [{x:70, y:40}, {x:430, y:60}];
-	var explode = new Audio("explode.wav");
-	var selfExplode = new Audio("self_explode.wav")
-	var score = 0;
-	var bullets = [];
-
-	function displayHero(){
-		document.getElementById('hero').style['top'] = hero.y + "px";
-		document.getElementById('hero').style['left'] = hero.x + "px";
-	}
-
-	function displayScore(){
-		document.getElementById('score').innerHTML = score;
-	}
-
-	function displayEnemies(){
-		output = '';
-		for (var i = 0; i < enemies.length; i++) {
-			output += "<div class='enemy1' style='top:"+ enemies[i].y +"px; left:" + enemies[i].x +"px;'></div>";
+	<script>
+		var hero = {
+			x: 750,
+			y: 400
 		}
-		document.getElementById('enemies').innerHTML = output;
-		//console.log(output);
-	}
+		var enemies = [{
+			x: 50,
+			y: 200
+		}, {
+			x: 250,
+			y: 400
+		}, {
+			x: 650,
+			y: 150
+		}, {
+			x: 650,
+			y: 350
+		}, {
+			x: 650,
+			y: 200
+		}, {
+			x: 50,
+			y: 200
+		}, {
+			x: 50,
+			y: 200
+		}];
+		var enemy2 = [{
+			x: 70,
+			y: 40
+		}, {
+			x: 430,
+			y: 60
+		}];
+		var explode = new Audio("explode.wav");
+		var selfExplode = new Audio("self_explode.wav")
+		var score = 0;
+		var bullets = [];
 
-	function displayEnemy2(){
-		output = '';
-		for (var i = 0; i < enemy2.length; i++) {
-			output += "<div class='enemy2' style='top:"+ enemy2[i].y +"px; left:" + enemy2[i].x +"px;'></div>";
+		function displayHero() {
+			document.getElementById('hero').style['top'] = hero.y + "px";
+			document.getElementById('hero').style['left'] = hero.x + "px";
 		}
-		document.getElementById('enemy2').innerHTML = output;
-	}
-	function moveEnemies(){
-		for (var i = 0; i < enemies.length; i++) {
-			enemies[i].y += 5;
 
-			if(enemies[i].y > 530){
-				enemies[i].y = 0;
-				enemies[i].x = Math.random()*700;
+		function displayScore() {
+			document.getElementById('score').innerHTML = score;
+		}
+
+		function displayEnemies() {
+			output = '';
+			for (var i = 0; i < enemies.length; i++) {
+				output += "<div class='enemy1' style='top:" + enemies[i].y + "px; left:" + enemies[i].x + "px;'></div>";
 			}
+			document.getElementById('enemies').innerHTML = output;
+			//console.log(output);
 		}
-	}
 
-	function moveEnemy2(){
-		for (var i = 0; i < enemy2.length; i++) {
-			enemy2[i].y += 5;
-
-			if(enemy2[i].y > 530){
-				enemy2[i].y = 0;
-				enemy2[i].x = Math.random()*700;
+		function displayEnemy2() {
+			output = '';
+			for (var i = 0; i < enemy2.length; i++) {
+				output += "<div class='enemy2' style='top:" + enemy2[i].y + "px; left:" + enemy2[i].x + "px;'></div>";
 			}
+			document.getElementById('enemy2').innerHTML = output;
 		}
-	}
 
-	function movebullets(){
-		for (var i = 0; i < bullets.length; i++) {
-			bullets[i].y -= 5;
+		function moveEnemies() {
+			for (var i = 0; i < enemies.length; i++) {
+				enemies[i].y += 5;
 
-			if (bullets[i].y < 0) {
-				bullets[i] = bullets[bullets.length -1];
-				bullets.pop();
-			}
-		}
-	}
-
-	function displayBullets(){
-		var output = '';
-		for (var i = 0; i < bullets.length; i++) {
-			output += "<div class='bullet' style='top:"+ bullets[i].y +"px; left:" + bullets[i].x +"px;'></div>";
-		}
-		document.getElementById('bullets').innerHTML = output;
-		//console.log(output);
-	}
-
-	function gameLoop(){
-		displayHero();
-		displayEnemies();
-		displayEnemy2();
-		moveEnemies();
-		moveEnemy2();
-		movebullets();
-		displayBullets();
-		detectColliosion();
-		detectHeadon();
-		displayScore();
-	}
-
-
-	function detectColliosion(){
-		for (var i = 0; i < bullets.length; i++) {
-			for (var j = 0; j < enemies.length; j++) {
-				if ( Math.abs(bullets[i].x - enemies[j].x ) < 10 &&
-			         Math.abs(bullets[i].y - enemies[j].y ) < 10 ) {
-					console.log("collision");
-					score += 10;
-					explode.play();
-
-					document.getElementById('hero').style['background-position'] = "-110px -30px";
+				if (enemies[i].y > 530) {
+					enemies[i].y = 0;
+					enemies[i].x = Math.random() * 700;
 				}
 			}
 		}
-	}
+
+		function moveEnemy2() {
+			for (var i = 0; i < enemy2.length; i++) {
+				enemy2[i].y += 5;
+
+				if (enemy2[i].y > 530) {
+					enemy2[i].y = 0;
+					enemy2[i].x = Math.random() * 700;
+				}
+			}
+		}
+
+		function movebullets() {
+			for (var i = 0; i < bullets.length; i++) {
+				bullets[i].y -= 5;
+
+				if (bullets[i].y < 0) {
+					bullets[i] = bullets[bullets.length - 1];
+					bullets.pop();
+				}
+			}
+		}
+
+		function displayBullets() {
+			var output = '';
+			for (var i = 0; i < bullets.length; i++) {
+				output += "<div class='bullet' style='top:" + bullets[i].y + "px; left:" + bullets[i].x + "px;'></div>";
+			}
+			document.getElementById('bullets').innerHTML = output;
+			//console.log(output);
+		}
+
+		function gameLoop() {
+			displayHero();
+			displayEnemies();
+			displayEnemy2();
+			moveEnemies();
+			moveEnemy2();
+			movebullets();
+			displayBullets();
+			detectColliosion();
+			detectHeadon();
+			displayScore();
+		}
+
+		function detectColliosion() {
+			var output = '';
+			for (var i = 0; i < bullets.length; i++) {
+				for (var j = 0; j < enemies.length; j++) {
+					if (Math.abs(bullets[i].x - enemies[j].x) < 10 &&
+						Math.abs(bullets[i].y - enemies[j].y) < 10) {
+						console.log(enemies[j]);
+						score += 10;
+						explode.play();
+						enemies[j] = enemies[enemies.length - 1];
+						enemies.pop();
+						output += "<div class='explode' style='top:" + bullets[i].y + "px; left:" + bullets[i].x + "px;'></div>";
+						document.getElementById('bullets').innerHTML = output;
+					}
+				}
+			}
+		}
 
 
-	function planDie(){
-		document.getElementById('hero').style['display'] = "none";
-		hero.x = 800;
-		hero.y = 50;
-	}
+		function explodeOne() {
+			document.getElementById('hero').style['background-position'] = "-110px -30px";
+		};
 
-	function explodeOne(){
-		document.getElementById('hero').style['background-position'] = "-110px -30px";
-	};
+		function heroDie() {
+			document.getElementById('hero').style['display'] = "none";
+			hero.x = 800;
+			hero.y = 50;
+		};
 
-	function heroDie(){
-		document.getElementById('hero').style['display'] = "none";
-		hero.x = 800;
-		hero.y = 50;
-	};
-
-	function detectHeadon(){
-		for (var i = 0; i < enemies.length; i++) {
-				if ( Math.abs(enemies[i].x - hero.x ) < 10 &&
-			         Math.abs(hero.y - enemies[i].y ) < 10 ) {
+		function detectHeadon() {
+			for (var i = 0; i < enemies.length; i++) {
+				if (Math.abs(enemies[i].x - hero.x) < 10 &&
+					Math.abs(hero.y - enemies[i].y) < 10) {
 					console.log("headon");
 					score += 500;
 					selfExplode.play();
@@ -226,25 +258,27 @@
 		}
 
 
-	setInterval(gameLoop, 20);
+		setInterval(gameLoop, 20);
 
-	document.onkeydown = function(a){
-		if(a.keyCode == 38){
-			hero.y -=10;
-		}else if (a.keyCode == 40) {
-			hero.y += 10;
-		}else if (a.keyCode == 37) {
-			hero.x -= 10;
-		}else if (a.keyCode == 39) {
-			hero.x += 10;
-		}else if (a.keyCode == 32) {
-			bullets.push( { x:hero.x+7, y:hero.y-15 } );
-			displayBullets();
+		document.onkeydown = function(a) {
+			if (a.keyCode == 38) {
+				hero.y -= 10;
+			} else if (a.keyCode == 40) {
+				hero.y += 10;
+			} else if (a.keyCode == 37) {
+				hero.x -= 10;
+			} else if (a.keyCode == 39) {
+				hero.x += 10;
+			} else if (a.keyCode == 32) {
+				bullets.push({
+					x: hero.x + 7,
+					y: hero.y - 15
+				});
+				displayBullets();
+			}
 		}
-	}
-
-
-</script>
+	</script>
 
 </body>
+
 </html>
