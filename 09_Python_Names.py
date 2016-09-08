@@ -7,7 +7,7 @@ students = [
 
 
 for dictionary in students:
-  print ' '.join(dictionary.values())
+  print ' '.join(dictionary.values()) #Nice use of join(), yet another way I've seen it done.
 
 
 users = {
@@ -23,8 +23,8 @@ users = {
   ]
  }
 counter = 0
-for key, data in users.iteritems():
+for key, data in users.iteritems(): #Good use of iteritems()
   print(key)
   for value in data:
     counter +=1
-    print counter, "-", ' '.join(value.values()), "-", len(''.join(value.values()))
+    print counter, "-", ' '.join(value.values()), "-", len(''.join(value.values())) #You're a big fan of the .values() ! 
