@@ -18,7 +18,8 @@ def score():
             print("Score is {}; Your grade is B".format(grade))
         elif grade <= 100:
             print("Score is {}; Your grade is A".format(grade))
-    else:
+        #Can I break your code if I supply a grade greater than 100?
+    else: # What is the complement to your else here?  The while loop?  Do you need the else?  
         print("End of the program. Bye!")
 
 score()
