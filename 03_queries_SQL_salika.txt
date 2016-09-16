@@ -19,6 +19,8 @@ WHERE category.name = 'Comedy'
 
 3) What query would you run to get all the films joined by actor_id=5? Your query should return the film title, description, and release year.
 
+// Comment(3): I am sure you noticed this in your SQL statement but missing a comma between actor_id and title
+
 SELECT actor.actor_id title, description, release_year, actor.first_name FROM film
 JOIN film_actor ON film.film_id = film_actor.film_id
 JOIN actor ON film_actor.actor_id = actor.actor_id
@@ -32,6 +34,9 @@ SELECT customer.store_id, customer.first_name, customer.last_name, customer.emai
 JOIN address ON customer.address_id = address.address_id
 JOIN city ON address.city_id = city.city_id
 WHERE city.city_id = 1 OR city.city_id = 42 OR city.city_id = 312 OR city.city_id = 459 AND customer.store_id = 1
+
+//comment(4): This one is very close but needs to be tweeked. Line 34 you are chaining all of these OR statements but then ending the last one with an AND. if you run this, you will get 6 results. This is because that last AND statement is only being applied to the last OR for 459. one way you can get around this is to do an OR/AND combination for each city ID, but this gets long. Another way to handle this is to use a Where IN grouping. WHERE city.city_id IN (1,42,312, 459) AND customer.store_id = 1; This will only select from the city_id for the information listed.
+
 
 5) What query would you run to get all the films with a "rating = G" and "special feature = behind the scenes", joined by actor_id = 15? Your query should return the film title, description, release year, rate, and special feature. Hint: You may use LIKE function in getting the 'behind the scenes' part.
 
